@@ -1,1 +1,15 @@
-GET http://localhost:3000/users/1 HTTP/1.1
+@protocol=http
+@host=localhost:3000
+@endpoint=users
+
+### Get User Data
+GET {{protocol}}://{{host}}/{{endpoint}}/ebuddy HTTP/1.1
+
+### Update User Data
+PUT {{protocol}}://{{host}}/{{endpoint}}/ebuddy
+Content-Type: application/json
+
+{
+  "first": "ebuddy",
+  "last": "pte ltd"
+}
