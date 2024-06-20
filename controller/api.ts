@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { ApiError } from '../entities/ApiError';
 
 export const updateUserData = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -9,7 +10,7 @@ export const updateUserData = async (req: Request, res: Response, next: NextFunc
 
 export const fetchUserData = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.status(200).json('Fetch data');
+    throw new ApiError(404, 'User not found');
   } catch (error) {
     next(error);
   }
