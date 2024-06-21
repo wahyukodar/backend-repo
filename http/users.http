@@ -1,11 +1,13 @@
 @protocol=http
 @host=localhost:5000
-@endpoint=users
+@endpointCreate=create-user
+@endpointUpdate=update-user-data
+@endpointFetch=fetch-user-data
 @uid=ebuddy
 @token=[REPLACE_WITH_ID_TOKEN]
 
 ### Create User
-POST {{protocol}}://{{host}}/{{endpoint}}
+POST {{protocol}}://{{host}}/{{endpointCreate}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -17,11 +19,11 @@ Authorization: Bearer {{token}}
 }
 
 ### Get User Data
-GET {{protocol}}://{{host}}/{{endpoint}}/{{uid}} HTTP/1.1
+GET {{protocol}}://{{host}}/{{endpointFetch}}/{{uid}} HTTP/1.1
 Authorization: Bearer {{token}}
 
 ### Update User Data
-PUT {{protocol}}://{{host}}/{{endpoint}}/{{uid}}
+PUT {{protocol}}://{{host}}/{{endpointUpdate}}/{{uid}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

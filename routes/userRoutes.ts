@@ -4,8 +4,8 @@ import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.post('', authMiddleware, createUserData);
-router.put('/:id', authMiddleware, updateUserData);
-router.get('/:id', authMiddleware, fetchUserData);
+router.post('/create-user', authMiddleware, createUserData);
+router.put('/update-user-data/:id', authMiddleware, updateUserData);
+router.get('/fetch-user-data/:id', authMiddleware, fetchUserData);
 
 export default router;

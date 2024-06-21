@@ -20,7 +20,8 @@ const createUser = async (userData: any) => {
 };
 
 const updateUser = async (userId: string, userData: any) => {
-  await userCollection.doc(userId).update(userData);
+  const userDoc = await userCollection.doc(userId).update(userData);
+  return userDoc;
 };
 
 const fetchUser = async (userId: string) => {
