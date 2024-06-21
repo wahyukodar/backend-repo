@@ -1,5 +1,5 @@
 @protocol=http
-@host=localhost:3000
+@host=localhost:5000
 @endpoint=users
 @uid=ebuddy
 @token=[REPLACE_WITH_ID_TOKEN]
