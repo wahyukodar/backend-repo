@@ -1,12 +1,31 @@
 import { db } from '../config/firebaseConfig';
+import * as admin from 'firebase-admin';
 
-const usersCollection = db.collection('users');
+const userCollection = db.collection('users');
 
-export const updateUser = async (id: string, data: any) => {
-  await usersCollection.doc(id).update(data);
+const createUser = async (userData: any) => {
+  const { uid, email, password, displayName } = userData;
+  const userRecord = await admin.auth().createUser({
+    uid,
+    email,
+    password,
+    displayName
+  });
+
+  await userCollection.doc(userRecord.uid).set({
+    email,
+    displayName,
+    createdAt: admin.firestore.FieldValue.serverTimestamp()
+  });
 };
 
-export const fetchUser = async (id: string) => {
-  const doc = await usersCollection.doc(id).get();
-  return doc.exists ? doc.data() : null;
+const updateUser = async (userId: string, userData: any) => {
+  await userCollection.doc(userId).update(userData);
 };
+
+const fetchUser = async (userId: string) => {
+  const userDoc = await userCollection.doc(userId).get();
+  return userDoc.exists ? userDoc.data() : null;
+};
+
+export { createUser, updateUser, fetchUser };

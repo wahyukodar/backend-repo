@@ -1,15 +1,51 @@
 @protocol=http
 @host=localhost:3000
 @endpoint=users
+@uid=ebuddy
+@token=[REPLACE_WITH_ID_TOKEN]
+
+### Create User
+POST {{protocol}}://{{host}}/{{endpoint}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "uid": "{{uid}}",
+  "email": "ebuddy@ebuddy.com",
+  "password": "pass123",
+  "displayName": "ebuddy"
+}
 
 ### Get User Data
-GET {{protocol}}://{{host}}/{{endpoint}}/ebuddy HTTP/1.1
+GET {{protocol}}://{{host}}/{{endpoint}}/{{uid}} HTTP/1.1
+Authorization: Bearer {{token}}
 
 ### Update User Data
-PUT {{protocol}}://{{host}}/{{endpoint}}/ebuddy
+PUT {{protocol}}://{{host}}/{{endpoint}}/{{uid}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "ebuddy",
+  "lastName": "pte ltd"
+}
+
+### Get ID Token from Client Side
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[REPLACE_WITH_API_KEY]
 Content-Type: application/json
 
 {
-  "first": "ebuddy",
-  "last": "pte ltd"
+  "email": "ebuddy@ebuddy.com",
+  "password": "pass123",
+  "returnSecureToken": true
+}
+
+### Signup
+POST https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[REPLACE_WITH_API_KEY]
+Content-Type: application/json
+
+{
+  "email": "",
+  "password": "",
+  "returnSecureToken": true
 }

@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import { updateUserData, fetchUserData } from '../controller/api';
+import { createUserData, updateUserData, fetchUserData } from '../controller/api';
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.put('/:id', updateUserData);
-router.get('/:id', fetchUserData);
+router.post('', authMiddleware, createUserData);
+router.put('/:id', authMiddleware, updateUserData);
+router.get('/:id', authMiddleware, fetchUserData);
 
 export default router;
