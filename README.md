@@ -1,5 +1,5 @@
-### Preparation
-- Add your `serviceAccountKey.json` in root directory this project
+### How to run
+- Type the command `npm run emulator`. This command will build the project and start the Firestore, Authentication, and Functions emulators.
 
 ### Informations
 

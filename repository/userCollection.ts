@@ -1,9 +1,9 @@
 import { db } from '../config/firebaseConfig';
 import * as admin from 'firebase-admin';
 
-const userCollection = db.collection('users');
+const userCollection = db.collection('USERS');
 
-const createUser = async (userData: any) => {
+const createUserAndAuth = async (userData: any) => {
   const { uid, email, password, displayName } = userData;
   const userRecord = await admin.auth().createUser({
     uid,
@@ -15,8 +15,21 @@ const createUser = async (userData: any) => {
   await userCollection.doc(userRecord.uid).set({
     email,
     displayName,
-    createdAt: admin.firestore.FieldValue.serverTimestamp()
+    createdAt: new Date()
   });
+
+  return userCollection;
+};
+
+const createUser = async (userData: any) => {
+  const { uid, email, displayName } = userData;
+  const user = await userCollection.doc(uid).set({
+    email,
+    displayName,
+    createdAt: new Date()
+  });
+
+  return user;
 };
 
 const updateUser = async (userId: string, userData: any) => {

@@ -4,7 +4,19 @@
 @endpointUpdate=update-user-data
 @endpointFetch=fetch-user-data
 @uid=ebuddy
-@token=[REPLACE_WITH_ID_TOKEN]
+@token=[REPLACE_WITH_API_KEY]
+
+### Create User
+POST {{protocol}}://{{host}}/{{endpointCreate}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "uid": "{{uid}}",
+  "email": "ebuddy@ebuddy.com",
+  "password": "pass123",
+  "displayName": "ebuddy"
+}
 
 ### Create User
 POST {{protocol}}://{{host}}/{{endpointCreate}}

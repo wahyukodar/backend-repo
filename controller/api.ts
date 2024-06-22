@@ -4,8 +4,8 @@ import { ApiError } from '../entities/ApiError';
 
 export const createUserData = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await createUser(req.body);
-    res.status(201).send({ message: 'User created successfully' });
+    const user = await createUser(req.body);
+    res.status(200).json(user);
   } catch (error) {
     console.log(error);
     next(new ApiError(500, 'Failed to create user'));

@@ -2,10 +2,18 @@
   "name": "backend-service",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/core/app.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node core/app.ts"
+    "start": "ts-node core/app.ts",
+    "build:watch": "tsc --watch",
+    "serve": "NODE_ENV=development npm run build && firebase emulators:start --only functions",
+    "emulator": "NODE_ENV=development npm run build && firebase emulators:start",
+    "shell": "npm run build && firebase functions:shell",
+    "deploy": "firebase deploy --only functions"
   },
   "keywords": [],
   "author": "",
@@ -15,11 +23,14 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/firebase": "^3.2.1",
+    "@types/helmet": "^4.0.0",
     "@types/node": "^20.14.6",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "firebase": "^10.12.2",
-    "firebase-admin": "^12.1.1",
+    "firebase-admin": "^12.2.0",
+    "firebase-functions": "^5.0.1",
+    "helmet": "^7.1.0",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
